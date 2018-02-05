@@ -1,4 +1,4 @@
-FROM node:6.9
+FROM node:6.11
 
 MAINTAINER J. Scott Smith <scott@newleafsolutionsinc.com>
 
@@ -14,9 +14,9 @@ WORKDIR /home/node/app
 ENV NODE_ENV production
 
 # Install dependencies
-RUN npm install -g migrate-mongo
+RUN npm install -g migrate-mongo @dendra-science/wait-for-mongo-cli
 COPY package.json /home/node/app
-COPY npm-shrinkwrap.json /home/node/app
+COPY package-lock.json /home/node/app
 RUN npm install
 
 # Best practice: run as user 'node'

@@ -1,14 +1,18 @@
 {
-  "name": "dendro-migrations",
-  "version": "0.0.2",
-  "description": "Project Dendro MongoDB Migrations.",
+  "name": "dendra-mongo-migrations",
+  "version": "0.0.4",
+  "description": "Dendra MongoDB migration scripts.",
   "license": "BSD-2-Clause-FreeBSD",
   "author": "J. Scott Smith <scott@newleafsolutionsinc.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DendraScience/dendra-mongo-migrations.git"
+  },
   "scripts": {
-    "start": "migrate-mongo up",
+    "start": "wait-for-mongo && migrate-mongo up",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "engines": {
-    "node": ">=6.5.0"
+    "node": ">=6.11.0"
   }
 }
