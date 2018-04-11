@@ -8,13 +8,16 @@ MAINTAINER J. Scott Smith <scott@newleafsolutionsinc.com>
 # 	https://github.com/nodejs/docker-node/blob/master/docs/BestPractices.md
 #
 
+RUN groupmod -g 2000 node \
+  && usermod -u 2000 -g 2000 node
+
 WORKDIR /home/node/app
 
 # Best practice: run with NODE_ENV set to production
 ENV NODE_ENV production
 
 # Install dependencies
-RUN npm install -g migrate-mongo @dendra-science/wait-for-mongo-cli
+RUN npm install -g migrate-mongo@2.2.1 @dendra-science/wait-for-mongo-cli
 COPY package.json /home/node/app
 COPY package-lock.json /home/node/app
 RUN npm install

@@ -20,8 +20,8 @@ MongoDB migration scripts to prepare a metadata database.
 
 1. Make this project directory the current directory, i.e. `cd dendra-mongo-migrations`.
 
-2. Build the project `docker build -t dendro:dendra-mongo-migrations .`.
+2. Build the project `docker build -t dendra:dendra-mongo-migrations .`.
 
-3. Tag the desired image, e.g. `docker tag f0ec409b5194 dendro/dendra-mongo-migrations:latest`.
+3. Tag the desired image, e.g. `docker tag f0ec409b5194 dendra/dendra-mongo-migrations:latest`.
 
-4. Push it via `docker push dendro/dendra-mongo-migrations`.
+4. Push it via `docker push dendra/dendra-mongo-migrations`.
