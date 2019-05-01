@@ -2,10 +2,9 @@
 
 MongoDB migration scripts to prepare a metadata database.
 
-
 ## Instructions
 
-1. Be sure you have Node version 6.11.x. If you’re using nvm, you may need to `nvm use 6.11.0`.
+1. Be sure you have Node version 10.15.x. If you’re using nvm, you may need to `nvm use 10.15`.
 
 2. Clone this repo.
 
@@ -14,7 +13,6 @@ MongoDB migration scripts to prepare a metadata database.
 4. Make this project directory the current directory, i.e. `cd dendra-mongo-migrations`.
 
 5. If all goes well, you should be able to run the predefined package scripts.
-
 
 ## To build and publish the Docker image
 

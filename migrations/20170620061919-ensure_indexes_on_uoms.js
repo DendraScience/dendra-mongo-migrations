@@ -1,26 +1,28 @@
 'use strict'
 
+const COLL_NAME = 'uoms'
+
 module.exports = {
-  up: function (db) {
-    const uoms = db.collection('uoms')
+  up: function(db) {
+    const coll = db.collection(COLL_NAME)
 
     return Promise.all([
-      uoms.ensureIndex({
+      coll.createIndex({
         som_id: 1
       }),
 
-      uoms.ensureIndex({
+      coll.createIndex({
         unit_tags: 1
       })
     ])
   },
 
-  down: function (db) {
-    const uoms = db.collection('uoms')
+  down: function(db) {
+    const coll = db.collection(COLL_NAME)
 
     return Promise.all([
-      uoms.dropIndex('som_id_1'),
-      uoms.dropIndex('unit_tags_1')
+      coll.dropIndex('som_id_1'),
+      coll.dropIndex('unit_tags_1')
     ])
   }
 }

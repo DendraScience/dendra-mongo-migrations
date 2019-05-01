@@ -1,4 +1,4 @@
-FROM node:6.11
+FROM node:10.15
 
 MAINTAINER J. Scott Smith <scott@newleafsolutionsinc.com>
 
@@ -17,7 +17,7 @@ WORKDIR /home/node/app
 ENV NODE_ENV production
 
 # Install dependencies
-RUN npm install -g migrate-mongo@2.2.1 @dendra-science/wait-for-mongo-cli
+RUN npm install -g migrate-mongo @dendra-science/wait-for-mongo-cli
 COPY package.json /home/node/app
 COPY package-lock.json /home/node/app
 RUN npm install

@@ -1,24 +1,43 @@
 'use strict'
 
+const COLL_NAME = 'vocabularies'
+
 module.exports = {
-  up: function (db) {
-    const vocabularies = db.collection('vocabularies')
+  up: function(db) {
+    const coll = db.collection(COLL_NAME)
 
     return Promise.all([
-      vocabularies.ensureIndex({
-        scheme_id: 1,
-        label: 1
-      }, {
-        unique: true
-      })
+      coll.createIndex(
+        {
+          scheme_id: 1,
+          label: 1
+        },
+        {
+          unique: true
+        }
+      ),
+
+      coll.createIndex(
+        {
+          description: 'text',
+          label: 'text',
+          'term.definition': 'text',
+          'term.label': 'text',
+          'term.name': 'text'
+        },
+        {
+          name: 'text_index'
+        }
+      )
     ])
   },
 
-  down: function (db) {
-    const vocabularies = db.collection('vocabularies')
+  down: function(db) {
+    const coll = db.collection(COLL_NAME)
 
     return Promise.all([
-      vocabularies.dropIndex('scheme_id_1_label_1')
+      coll.dropIndex('scheme_id_1_label_1'),
+      coll.dropIndex('text_index')
     ])
   }
 }

@@ -1,23 +1,51 @@
 'use strict'
 
+const COLL_NAME = 'organizations'
+
 module.exports = {
-  up: function (db) {
-    const organizations = db.collection('organizations')
+  up: function(db) {
+    const coll = db.collection(COLL_NAME)
 
     return Promise.all([
-      organizations.ensureIndex({
-        name: 1
-      }, {
-        unique: true
-      })
+      coll.createIndex(
+        {
+          name: 1
+        },
+        {
+          unique: true
+        }
+      ),
+
+      coll.createIndex(
+        {
+          slug: 1
+        },
+        {
+          sparse: true,
+          unique: true
+        }
+      ),
+
+      coll.createIndex(
+        {
+          description: 'text',
+          full_name: 'text',
+          name: 'text'
+        },
+        {
+          name: 'text_index'
+        }
+      )
     ])
   },
 
-  down: function (db) {
-    const organizations = db.collection('organizations')
+  down: function(db) {
+    const coll = db.collection(COLL_NAME)
 
     return Promise.all([
-      organizations.dropIndex('name_1')
+      coll.dropIndex('name_1'),
+      coll.dropIndex('slug_1'),
+      coll.dropIndex('text_index')
     ])
   }
 }

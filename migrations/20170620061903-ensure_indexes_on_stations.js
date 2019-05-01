@@ -1,37 +1,61 @@
 'use strict'
 
+const COLL_NAME = 'stations'
+
 module.exports = {
-  up: function (db) {
-    const stations = db.collection('stations')
+  up: function(db) {
+    const coll = db.collection(COLL_NAME)
 
     return Promise.all([
-      stations.ensureIndex({
-        'hashes.key': 1,
-        'hashes.str': 1
-      }),
+      // TODO: Implement
+      // coll.createIndex({
+      //   'hashes.key': 1,
+      //   'hashes.str': 1
+      // }),
 
-      stations.ensureIndex({
-        slug: 1
-      }, {
-        sparse: true,
-        unique: true
-      }),
+      coll.createIndex(
+        {
+          slug: 1
+        },
+        {
+          sparse: true,
+          unique: true
+        }
+      ),
 
-      stations.ensureIndex({
+      coll.createIndex({
         station_type: 1,
-        enabled: 1,
         name: 1
-      })
+      }),
+
+      coll.createIndex({
+        organization_id: 1,
+        station_type: 1,
+        name: 1
+      }),
+
+      coll.createIndex(
+        {
+          full_name: 'text',
+          name: 'text'
+        },
+        {
+          name: 'text_index'
+        }
+      )
     ])
   },
 
-  down: function (db) {
-    const stations = db.collection('stations')
+  down: function(db) {
+    const coll = db.collection(COLL_NAME)
 
     return Promise.all([
-      stations.dropIndex('hashes.key_1_hashes.str_1'),
-      stations.dropIndex('slug_1'),
-      stations.dropIndex('station_type_1_enabled_1_name_1')
+      // TODO: Implement
+      // coll.dropIndex('hashes.key_1_hashes.str_1'),
+      coll.dropIndex('slug_1'),
+      coll.dropIndex('station_type_1_name_1'),
+      coll.dropIndex('organization_id_1_station_type_1_name_1'),
+      coll.dropIndex('text_index')
     ])
   }
 }
