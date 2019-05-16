@@ -8,6 +8,12 @@ module.exports = {
   mongodb: {
     url: process.env.MONGO_URL,
 
-    databaseName: process.env.MONGO_DB_NAME
+    databaseName: process.env.MONGO_DB_NAME,
+
+    options: {
+      useNewUrlParser: true // removes a deprecation warning when connecting
+      //   connectTimeoutMS: 3600000, // increase connection timeout to 1 hour
+      //   socketTimeoutMS: 3600000, // increase socket timeout to 1 hour
+    }
   }
 }
