@@ -1,31 +1,26 @@
 'use strict'
 
-const COLL_NAME = 'users'
+const COLL_NAME = 'annotations'
 
 module.exports = {
   up(db) {
     const coll = db.collection(COLL_NAME)
 
     return Promise.all([
-      coll.createIndex(
-        {
-          email: 1
-        },
-        {
-          sparse: true,
-          unique: true
-        }
-      ),
+      coll.createIndex({
+        'intervals.begins_at': 1,
+        'intervals.ends_before': 1
+      }),
 
       coll.createIndex({
-        person_id: 1
+        organization_id: 1,
+        title: 1
       }),
 
       coll.createIndex(
         {
-          email: 'text',
-          full_name: 'text',
-          name: 'text'
+          description: 'text',
+          title: 'text'
         },
         {
           name: 'text_index'
@@ -38,8 +33,8 @@ module.exports = {
     const coll = db.collection(COLL_NAME)
 
     return Promise.all([
-      coll.dropIndex('email_1'),
-      coll.dropIndex('person_id_1'),
+      coll.dropIndex('intervals.begins_at_1_intervals.ends_before_1'),
+      coll.dropIndex('organization_id_1_title_1'),
       coll.dropIndex('text_index')
     ])
   }

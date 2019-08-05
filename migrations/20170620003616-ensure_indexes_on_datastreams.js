@@ -3,7 +3,7 @@
 const COLL_NAME = 'datastreams'
 
 module.exports = {
-  up: function(db) {
+  up(db) {
     const coll = db.collection('datastreams')
 
     return Promise.all([
@@ -53,7 +53,7 @@ module.exports = {
     ])
   },
 
-  down: function(db) {
+  down(db) {
     const coll = db.collection('datastreams')
 
     return Promise.all([

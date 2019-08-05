@@ -14,7 +14,7 @@ const defaultUser = {
 }
 
 module.exports = {
-  up: function(db) {
+  up(db) {
     const coll = db.collection(COLL_NAME)
 
     return coll.findOne({ roles: 'sys-admin' }).then(user => {
@@ -22,7 +22,7 @@ module.exports = {
     })
   },
 
-  down: function(db) {
+  down(db) {
     const coll = db.collection(COLL_NAME)
 
     return coll.deleteOne({ email: defaultUser.email })
